@@ -23,7 +23,7 @@ const words = [
 let message = document.querySelector(".message");
 
 wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
-console.log(wordsToGuess);
+
 // game setting
 let numOfTries = wordsToGuess.length;
 let numOfLetters = wordsToGuess.length;
@@ -140,6 +140,7 @@ function checkWord() {
     else {
       message.innerHTML = `You lost,  the word was ${wordsToGuess}`;
       message.style = "color:red; font-size: 20px; font-weight: bold";
+      checkBtn.disabled = true;
     }
   }
 }
