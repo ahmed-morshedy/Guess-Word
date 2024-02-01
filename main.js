@@ -19,6 +19,9 @@ const words = [
   "Secondary",
   "Replica",
 ];
+
+let message = document.querySelector(".message");
+
 wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
 console.log(wordsToGuess);
 // game setting
@@ -115,25 +118,31 @@ function checkWord() {
 
   if (success) {
     //show success message
-    const successMessage = document.querySelector(".message");
-    successMessage.innerHTML = `You guessed the word correctly in ${currentTry} tries`;
-    successMessage.style = "color:green; fonst-size: 20px; font-weight: bold";
+    message.innerHTML = `You guessed the word correctly in ${currentTry} tries`;
+    message.style = "color:green; font-size: 20px; font-weight: bold";
   } else {
     currentTry++;
     const nextTry = document.querySelector(`.try-${currentTry}`);
+
     if (nextTry) {
       nextTry.classList.remove("disable-inputs");
       const inputsInDisDiv = document.querySelectorAll(
         `.try-${currentTry} input`
       );
+
       inputsInDisDiv.forEach((input) => {
         input.disabled = false;
       });
+
       document.querySelector(`.try-${currentTry} input`).focus();
+    }
+    //show lose message
+    else {
+      message.innerHTML = `You lost,  the word was ${wordsToGuess}`;
+      message.style = "color:red; font-size: 20px; font-weight: bold";
     }
   }
 }
-
 window.onload = function () {
   generateInputs();
 };
