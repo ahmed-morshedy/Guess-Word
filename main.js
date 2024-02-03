@@ -1,13 +1,12 @@
 // Game Name
-const gameName = "Guess The Word ";
+const gameName = "Guess The Country ";
 document.title = gameName;
 document.getElementById("game-name").innerHTML = gameName;
 document.querySelector(
   "footer"
 ).innerHTML = ` Coded By Ahmed-Morshedy | ${gameName} `;
-// const gameDescription = `Guess the word by entering the letters in the correct order. You have ${numOfTries} tries to guess the word.`;
-// const gameDescriptionEl = document.querySelector(".game-description");
-// gameDescriptionEl.innerHTML = gameDescription;
+const gamedescription = `Guess the country name in the least number of tries`;
+document.querySelector(".game-description").innerHTML = gamedescription;
 const changeLevel = document.querySelector(".change-level");
 const hintBtn = document.querySelector(".hint");
 // game level
@@ -17,7 +16,7 @@ let gameLevel = 1;
 let wordsToGuess = "";
 let words = [];
 if (gameLevel === 1) {
-  words = ["Create", "update", "Delete", "column", "Master", "Slave"];
+  words = ["Egypt", "China", "England", "Spain", "Mexico"];
 } else if (gameLevel === 2) {
   words = ["JavaScript", "Python", "Java", "C#", "C++", "Ruby"];
 } else if (gameLevel === 3) {
@@ -33,8 +32,6 @@ let numOfLetters = wordsToGuess.length;
 let currentTry = 1;
 
 function generateInputs() {
-  // console.log(wordsToGuess);
-  console.log(gameLevel);
   //get inputs container
   const inputsContainer = document.querySelector(".inputs");
   //create main try div
@@ -127,7 +124,7 @@ function checkWord() {
   });
   if (success) {
     //show success message
-    message.innerHTML = `You guessed the word correctly in ${currentTry} tries`;
+    message.innerHTML = `You guessed the country correctly in ${currentTry} tries`;
     message.style = "color:green;";
     // changeLevel.style.display = "inline-block";
     // changeLevel.innerHTML = "Next Level";
@@ -154,7 +151,7 @@ function checkWord() {
     }
     //show lose message
     else {
-      message.innerHTML = `You lost,  the word was ${wordsToGuess}`;
+      message.innerHTML = `You lost, the country was ${wordsToGuess}`;
       message.style = "color:red;";
       // changeLevel.style.display = "inline-block";
       // changeLevel.style.backgroundColor = "black";
@@ -172,7 +169,6 @@ window.onload = function () {
 //   //remove all inputs
 //   const inputsContainer = document.querySelector(".inputs");
 //   inputsContainer.innerHTML = "";
-//   console.log(wordsToGuess);
 //   message.innerHTML = "";
 //   checkBtn.disabled = false;
 //   generateInputs();
