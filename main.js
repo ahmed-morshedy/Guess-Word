@@ -5,7 +5,11 @@ document.getElementById("game-name").innerHTML = gameName;
 document.querySelector(
   "footer"
 ).innerHTML = ` Coded By Ahmed-Morshedy | ${gameName} `;
-
+// const gameDescription = `Guess the word by entering the letters in the correct order. You have ${numOfTries} tries to guess the word.`;
+// const gameDescriptionEl = document.querySelector(".game-description");
+// gameDescriptionEl.innerHTML = gameDescription;
+const changeLevel = document.querySelector(".change-level");
+const hintBtn = document.querySelector(".hint");
 // game level
 let gameLevel = 1;
 
@@ -19,7 +23,6 @@ if (gameLevel === 1) {
 } else if (gameLevel === 3) {
   words = ["HTML", "CSS", "SASS", "LESS", "Bootstrap", "Tailwind"];
 }
-console.log(words);
 let message = document.querySelector(".message");
 
 wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
@@ -28,7 +31,10 @@ wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
 let numOfTries = wordsToGuess.length;
 let numOfLetters = wordsToGuess.length;
 let currentTry = 1;
+
 function generateInputs() {
+  // console.log(wordsToGuess);
+  console.log(gameLevel);
   //get inputs container
   const inputsContainer = document.querySelector(".inputs");
   //create main try div
@@ -115,11 +121,21 @@ function checkWord() {
       success = false;
     }
   }
-
+  let allTries = document.querySelectorAll(".inputs div ");
+  allTries.forEach((tryDiv) => {
+    tryDiv.classList.add("disable-inputs");
+  });
   if (success) {
     //show success message
     message.innerHTML = `You guessed the word correctly in ${currentTry} tries`;
-    message.style = "color:green; font-size: 20px; font-weight: bold";
+    message.style = "color:green;";
+    // changeLevel.style.display = "inline-block";
+    // changeLevel.innerHTML = "Next Level";
+    gameLevel++;
+    // wordsToGuess =
+    //   words[Math.floor(Math.random() * words.length)].toLowerCase();
+    checkBtn.disabled = true;
+    hintBtn.disabled = true;
   } else {
     currentTry++;
     const nextTry = document.querySelector(`.try-${currentTry}`);
@@ -138,12 +154,27 @@ function checkWord() {
     }
     //show lose message
     else {
-      checkBtn.disabled = true;
       message.innerHTML = `You lost,  the word was ${wordsToGuess}`;
-      message.style = "color:red; font-size: 20px; font-weight: bold";
+      message.style = "color:red;";
+      // changeLevel.style.display = "inline-block";
+      // changeLevel.style.backgroundColor = "black";
+      // changeLevel.innerHTML = "Change Word";
+      checkBtn.disabled = true;
+      hintBtn.disabled = true;
     }
   }
 }
 window.onload = function () {
   generateInputs();
 };
+
+// changeLevel.addEventListener("click", function () {
+//   //remove all inputs
+//   const inputsContainer = document.querySelector(".inputs");
+//   inputsContainer.innerHTML = "";
+//   console.log(wordsToGuess);
+//   message.innerHTML = "";
+//   checkBtn.disabled = false;
+//   generateInputs();
+//   changeLevel.style.display = "none";
+// });

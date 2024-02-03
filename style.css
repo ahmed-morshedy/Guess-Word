@@ -100,6 +100,23 @@ h1 {
         cursor: no-drop;
       }
     }
+    .message {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .change-level {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      background-color: green;
+      color: white;
+      border-radius: 4px;
+      width: fit-content;
+      display: none;
+    }
   }
   .key-colors {
     .key-color {
