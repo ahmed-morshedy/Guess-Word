@@ -5,8 +5,7 @@ document.getElementById("game-name").innerHTML = gameName;
 document.querySelector(
   "footer"
 ).innerHTML = ` Coded By Ahmed-Morshedy | ${gameName} `;
-const gamedescription = `Guess the country name in the least number of tries`;
-document.querySelector(".game-description").innerHTML = gamedescription;
+
 const changeLevel = document.querySelector(".change-level");
 const hintBtn = document.querySelector(".hint");
 // game level
