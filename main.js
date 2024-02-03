@@ -138,9 +138,9 @@ function checkWord() {
     }
     //show lose message
     else {
+      checkBtn.disabled = true;
       message.innerHTML = `You lost,  the word was ${wordsToGuess}`;
       message.style = "color:red; font-size: 20px; font-weight: bold";
-      checkBtn.disabled = true;
     }
   }
 }
