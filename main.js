@@ -6,20 +6,20 @@ document.querySelector(
   "footer"
 ).innerHTML = ` Coded By Ahmed-Morshedy | ${gameName} `;
 
+// game level
+let gameLevel = 1;
+
 //Words to guess
 let wordsToGuess = "";
-const words = [
-  "Create",
-  "update",
-  "Delete",
-  "column",
-  "Master",
-  "Slave",
-  "Primary",
-  "Secondary",
-  "Replica",
-];
-
+let words = [];
+if (gameLevel === 1) {
+  words = ["Create", "update", "Delete", "column", "Master", "Slave"];
+} else if (gameLevel === 2) {
+  words = ["JavaScript", "Python", "Java", "C#", "C++", "Ruby"];
+} else if (gameLevel === 3) {
+  words = ["HTML", "CSS", "SASS", "LESS", "Bootstrap", "Tailwind"];
+}
+console.log(words);
 let message = document.querySelector(".message");
 
 wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
