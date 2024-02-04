@@ -12,25 +12,32 @@ const hintBtn = document.querySelector(".hint");
 let gameLevel = 1;
 
 //Words to guess
-let wordsToGuess = "";
 let words = [];
-if (gameLevel === 1) {
-  words = ["Egypt", "China", "England", "Spain", "Mexico"];
-} else if (gameLevel === 2) {
-  words = ["JavaScript", "Python", "Java", "C#", "C++", "Ruby"];
-} else if (gameLevel === 3) {
-  words = ["HTML", "CSS", "SASS", "LESS", "Bootstrap", "Tailwind"];
+function generateWords() {
+  if (gameLevel === 1) {
+    words = ["Egypt", "China", "England", "Spain", "Mexico"];
+  } else if (gameLevel === 2) {
+    words = ["JavaScript", "Python", "Java", "C#", "C++", "Ruby"];
+  } else if (gameLevel === 3) {
+    words = ["HTML", "CSS", "SASS", "LESS", "Bootstrap", "Tailwind"];
+  } else {
+    words = ["React", "Vue", "Angular", "Ember", "Backbone", "Svelte"];
+  }
+  return words;
 }
+let wordsToGuess =
+  generateWords()[Math.floor(Math.random() * words.length)].toLowerCase();
+// words = generateWords();
 let message = document.querySelector(".message");
 
-wordsToGuess = words[Math.floor(Math.random() * words.length)].toLowerCase();
-
+// wordsToGuess() = words[Math.floor(Math.random() * words.length)].toLowerCase();
 // game setting
 let numOfTries = wordsToGuess.length;
 let numOfLetters = wordsToGuess.length;
 let currentTry = 1;
 
 function generateInputs() {
+  console.log(wordsToGuess);
   //get inputs container
   const inputsContainer = document.querySelector(".inputs");
   //create main try div
@@ -125,11 +132,13 @@ function checkWord() {
     //show success message
     message.innerHTML = `You guessed the country correctly in ${currentTry} tries`;
     message.style = "color:green;";
-    // changeLevel.style.display = "inline-block";
-    // changeLevel.innerHTML = "Next Level";
     gameLevel++;
-    // wordsToGuess =
-    //   words[Math.floor(Math.random() * words.length)].toLowerCase();
+    wordsToGuess =
+      generateWords()[Math.floor(Math.random() * words.length)].toLowerCase();
+    numOfTries = wordsToGuess.length;
+    numOfLetters = wordsToGuess.length;
+    changeLevel.style.display = "inline-block";
+    changeLevel.innerHTML = "Next Level";
     checkBtn.disabled = true;
     hintBtn.disabled = true;
   } else {
@@ -152,9 +161,13 @@ function checkWord() {
     else {
       message.innerHTML = `You lost, the country was ${wordsToGuess}`;
       message.style = "color:red;";
-      // changeLevel.style.display = "inline-block";
-      // changeLevel.style.backgroundColor = "black";
-      // changeLevel.innerHTML = "Change Word";
+      wordsToGuess =
+        generateWords()[Math.floor(Math.random() * words.length)].toLowerCase();
+      numOfTries = wordsToGuess.length;
+      numOfLetters = wordsToGuess.length;
+      changeLevel.style.display = "inline-block";
+      changeLevel.style.backgroundColor = "black";
+      changeLevel.innerHTML = "Change Word";
       checkBtn.disabled = true;
       hintBtn.disabled = true;
     }
@@ -164,12 +177,14 @@ window.onload = function () {
   generateInputs();
 };
 
-// changeLevel.addEventListener("click", function () {
-//   //remove all inputs
-//   const inputsContainer = document.querySelector(".inputs");
-//   inputsContainer.innerHTML = "";
-//   message.innerHTML = "";
-//   checkBtn.disabled = false;
-//   generateInputs();
-//   changeLevel.style.display = "none";
-// });
+changeLevel.addEventListener("click", function () {
+  //remove all inputs
+  const inputsContainer = document.querySelector(".inputs");
+  inputsContainer.innerHTML = "";
+  message.innerHTML = "";
+  checkBtn.disabled = false;
+  hintBtn.disabled = false;
+  changeLevel.style.display = "none";
+  currentTry = 1;
+  generateInputs();
+});
