@@ -15,13 +15,13 @@ let gameLevel = 1;
 let words = [];
 function generateWords() {
   if (gameLevel === 1) {
-    words = ["Egypt", "China", "England", "Spain", "Mexico"];
+    words = ["Palestine", "China", "England", "Spain", "India", "France"];
   } else if (gameLevel === 2) {
-    words = ["JavaScript", "Python", "Java", "C#", "C++", "Ruby"];
+    words = ["libya", "Bahrain", "Turkiye", "Mexico", "brazil", "Niger"];
   } else if (gameLevel === 3) {
-    words = ["HTML", "CSS", "SASS", "LESS", "Bootstrap", "Tailwind"];
+    words = ["Pakistan", "Czech", "Chile", "Cameron", "Egypt", "Qatar"];
   } else {
-    words = ["React", "Vue", "Angular", "Ember", "Backbone", "Svelte"];
+    words = ["Lebanon", "Yemen", "Syria", "Iraq", "Kuwait", "Morocco"];
   }
   return words;
 }
