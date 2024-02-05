@@ -95,9 +95,21 @@ function generateInputs() {
       }
 
       //ArrowLeft and Backspace
-      else if (e.key === "ArrowLeft" || e.key === "Backspace") {
+      else if (e.key === "ArrowLeft") {
         const prevInput = inputs[currentIndex - 1];
         if (prevInput) prevInput.focus();
+      }
+
+      //Backspace
+      else if (e.key === "Backspace") {
+        let currentInput = inputs[currentIndex];
+        currentInput.value = "";
+        const prevInput = inputs[currentIndex - 1];
+
+        if (prevInput) {
+          prevInput.value = "";
+          prevInput.focus();
+        }
       }
     });
   });
