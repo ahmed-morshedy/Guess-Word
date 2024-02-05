@@ -7,9 +7,11 @@ document.querySelector(
 ).innerHTML = ` Coded By Ahmed-Morshedy | ${gameName} `;
 
 const changeLevel = document.querySelector(".change-level");
-const hintBtn = document.querySelector(".hint");
+
 // game level
 let gameLevel = 1;
+const numOfHints = document.querySelector(".hint span");
+numOfHints.innerHTML = "1";
 
 //Words to guess
 let words = [];
@@ -97,9 +99,22 @@ function generateInputs() {
   });
 }
 
+const hintBtn = document.querySelector(".hint");
+hintBtn.addEventListener("click", function () {
+  const randomIndex = Math.floor(Math.random() * wordsToGuess.length);
+  const inputfield = document.querySelector(
+    `#guess-${currentTry}-letter-${randomIndex + 1}`
+  );
+  inputfield.value = wordsToGuess[randomIndex].toUpperCase();
+
+  inputfield.disabled = true;
+  inputfield.classList.add("yes-in-place");
+  numOfHints.innerHTML = parseInt(numOfHints.innerHTML) - 1;
+  if (numOfHints.innerHTML === "0") hintBtn.disabled = true;
+});
+
 const checkBtn = document.querySelector(".check");
 checkBtn.addEventListener("click", checkWord);
-
 function checkWord() {
   let success = true;
 
@@ -187,4 +202,9 @@ changeLevel.addEventListener("click", function () {
   changeLevel.style.display = "none";
   currentTry = 1;
   generateInputs();
+  if (gameLevel === 1) {
+    numOfHints.innerHTML = "1";
+  } else {
+    numOfHints.innerHTML = "2";
+  }
 });
