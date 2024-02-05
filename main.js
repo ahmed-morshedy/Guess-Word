@@ -10,8 +10,6 @@ const changeLevel = document.querySelector(".change-level");
 
 // game level
 let gameLevel = 1;
-const numOfHints = document.querySelector(".hint span");
-numOfHints.innerHTML = "1";
 
 //Words to guess
 let words = [];
@@ -38,8 +36,14 @@ let numOfTries = wordsToGuess.length;
 let numOfLetters = wordsToGuess.length;
 let currentTry = 1;
 
+const numOfHints = document.querySelector(".hint span");
+if (numOfLetters > 6) {
+  numOfHints.innerHTML = "3";
+} else {
+  numOfHints.innerHTML = "1";
+}
+
 function generateInputs() {
-  console.log(wordsToGuess);
   //get inputs container
   const inputsContainer = document.querySelector(".inputs");
   //create main try div
@@ -101,14 +105,26 @@ function generateInputs() {
 
 const hintBtn = document.querySelector(".hint");
 hintBtn.addEventListener("click", function () {
-  const randomIndex = Math.floor(Math.random() * wordsToGuess.length);
-  const inputfield = document.querySelector(
-    `#guess-${currentTry}-letter-${randomIndex + 1}`
+  let inputsfield = document.querySelectorAll(`.try-${currentTry} input`);
+  const emptyInputs = Array.from(inputsfield).filter(
+    (input) => input.value === ""
   );
-  inputfield.value = wordsToGuess[randomIndex].toUpperCase();
 
-  inputfield.disabled = true;
-  inputfield.classList.add("yes-in-place");
+  if (emptyInputs.length > 0) {
+    const randomIndex = Math.floor(Math.random() * emptyInputs.length);
+    const randomInput = emptyInputs[randomIndex];
+    const selectLtter = Array.from(inputsfield).indexOf(randomInput);
+    randomInput.value = wordsToGuess[selectLtter].toUpperCase();
+    randomInput.disabled = true;
+    randomInput.classList.add("yes-in-place");
+  } else if (emptyInputs.length === 0) {
+    const randomIndex = Math.floor(Math.random() * inputsfield.length);
+    const randomInput = inputsfield[randomIndex];
+    const selectLtter = Array.from(inputsfield).indexOf(randomInput);
+    randomInput.value = wordsToGuess[selectLtter].toUpperCase();
+    randomInput.disabled = true;
+    randomInput.classList.add("yes-in-place");
+  }
   numOfHints.innerHTML = parseInt(numOfHints.innerHTML) - 1;
   if (numOfHints.innerHTML === "0") hintBtn.disabled = true;
 });
@@ -204,6 +220,8 @@ changeLevel.addEventListener("click", function () {
   generateInputs();
   if (gameLevel === 1) {
     numOfHints.innerHTML = "1";
+  } else if (numOfLetters > 6) {
+    numOfHints.innerHTML = "3";
   } else {
     numOfHints.innerHTML = "2";
   }
